@@ -29,12 +29,14 @@ package java.lang;
  * The <code>Runnable</code> interface should be implemented by any
  * class whose instances are intended to be executed by a thread. The
  * class must define a method of no arguments called <code>run</code>.
+ * 翻译：Runnable 接口应该由 其实例打算由一个线程来执行的任何类实现。该类必须定义一个名为 run 的无参方法。
  * <p>
  * This interface is designed to provide a common protocol for objects that
  * wish to execute code while they are active. For example,
  * <code>Runnable</code> is implemented by class <code>Thread</code>.
  * Being active simply means that a thread has been started and has not
  * yet been stopped.
+ * 翻译：此接口旨在为 希望在活动状态执行代码 的对象提供通用协议。例如，Thread 类实现了 Runnable。处于活动状态仅意味着线程已启动且尚未停止。
  * <p>
  * In addition, <code>Runnable</code> provides the means for a class to be
  * active while not subclassing <code>Thread</code>. A class that implements
@@ -46,6 +48,8 @@ package java.lang;
  * This is important because classes should not be subclassed
  * unless the programmer intends on modifying or enhancing the fundamental
  * behavior of the class.
+ * 翻译：此外，Runnable 提供了 使类处于活动状态而不用作为 Thread 子类 的方法。通过实例化 Thread 实例并将自身作为 target 传入，实现 Runnable 的类可以在不继承 Thread 的情况下运行。在大多数情况下，如果你只计划重写 run() 方法而不是其他 Thread 方法，则应该使用 Runnable 接口。
+ * 这很重要，除非程序员打算修改或增强类的基本行为，否则类不应被子类化。
  *
  * @author  Arthur van Hoff
  * @see     java.lang.Thread
@@ -59,9 +63,11 @@ public interface Runnable {
      * to create a thread, starting the thread causes the object's
      * <code>run</code> method to be called in that separately executing
      * thread.
+     * 翻译：当使用实现 Runnable 接口的对象创建线程时，启动线程会导致在该分离的执行线程中调用对象的 run 方法。
      * <p>
      * The general contract of the method <code>run</code> is that it may
      * take any action whatsoever.
+     * 翻译：run 方法的一般约定是它可以采取任何操作。
      *
      * @see     java.lang.Thread#run()
      */

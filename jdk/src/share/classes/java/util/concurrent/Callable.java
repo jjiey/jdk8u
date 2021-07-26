@@ -39,15 +39,18 @@ package java.util.concurrent;
  * A task that returns a result and may throw an exception.
  * Implementors define a single method with no arguments called
  * {@code call}.
+ * 翻译：一个可以返回结果的任务，也有可能抛出异常。实现者定义了一个名为 call 的无参方法。
  *
  * <p>The {@code Callable} interface is similar to {@link
  * java.lang.Runnable}, in that both are designed for classes whose
  * instances are potentially executed by another thread.  A
  * {@code Runnable}, however, does not return a result and cannot
  * throw a checked exception.
+ * 翻译：Callable 接口类似于 java.lang.Runnable 接口，因为两者都是为 实例可能由另一个线程执行 的类而设计。但是，Runnable 不会返回结果，也不会抛出受检异常。
  *
  * <p>The {@link Executors} class contains utility methods to
  * convert from other common forms to {@code Callable} classes.
+ * 翻译：Executors 类包含 将其他常见形式转换为 Callable 类 的实用方法。
  *
  * @see Executor
  * @since 1.5
@@ -58,9 +61,10 @@ package java.util.concurrent;
 public interface Callable<V> {
     /**
      * Computes a result, or throws an exception if unable to do so.
+     * 翻译：计算结果，如果无法计算则抛出异常。
      *
-     * @return computed result
-     * @throws Exception if unable to compute a result
+     * @return computed result 返回计算结果
+     * @throws Exception if unable to compute a result 如果无法计算结果，则抛出 Exception
      */
     V call() throws Exception;
 }

@@ -25,11 +25,12 @@
 
 package sun.misc;
 
-import java.security.*;
-import java.lang.reflect.*;
-
 import sun.reflect.CallerSensitive;
 import sun.reflect.Reflection;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.security.ProtectionDomain;
 
 
 /**
@@ -155,14 +156,17 @@ public final class Unsafe {
 
     /**
      * Stores a value into a given Java variable.
+     * 将值存储到给定的 Java 变量中。
      * <p>
      * The first two parameters are interpreted exactly as with
      * {@link #getInt(Object, long)} to refer to a specific
      * Java variable (field or array element).  The given value
      * is stored into that variable.
+     * 前两个参数的解释与 getInt(Object, long) 完全一样，以引用特定的 Java 变量（字段或数组元素）。给定的值存储在该变量中。
      * <p>
      * The variable must be of the same type as the method
      * parameter <code>x</code>.
+     * 变量必须与方法参数 x 的类型相同
      *
      * @param o Java heap object in which the variable resides, if any, else
      *        null
@@ -911,6 +915,7 @@ public final class Unsafe {
     public native int     getIntVolatile(Object o, long offset);
 
     /** Volatile version of {@link #putInt(Object, long, int)}  */
+    /** putInt(Object, long, int) 的 Volatile 版本  */
     public native void    putIntVolatile(Object o, long offset, int x);
 
     /** Volatile version of {@link #getBoolean(Object, long)}  */
@@ -965,6 +970,7 @@ public final class Unsafe {
     public native void    putOrderedObject(Object o, long offset, Object x);
 
     /** Ordered/Lazy version of {@link #putIntVolatile(Object, long, int)}  */
+    /** putIntVolatile(Object, long, int) 的 有序/延迟 版本  */
     public native void    putOrderedInt(Object o, long offset, int x);
 
     /** Ordered/Lazy version of {@link #putLongVolatile(Object, long, long)} */
