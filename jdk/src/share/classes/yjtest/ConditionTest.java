@@ -23,8 +23,7 @@ public class ConditionTest {
                     // 放得快
                     buffer.put(item);
                     Thread.sleep(600L);
-                }
-                catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 item++;
@@ -36,8 +35,7 @@ public class ConditionTest {
                     // 取的慢
                     buffer.take();
                     Thread.sleep(1000L);
-                }
-                catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
@@ -46,10 +44,15 @@ public class ConditionTest {
 
     static class BoundedBuffer<T> {
         private static final Lock lock = new ReentrantLock();
-        // 非满 / 非空（items 数组状态）
-        private static final Condition notFull = lock.newCondition(), notEmpty = lock.newCondition();
 
         private final Object[] items;
+        // 非满 / 非空（items 数组状态）
+        private static final Condition notFull = lock.newCondition(), notEmpty = lock.newCondition();
+        /**
+         * putptr: put index pointer
+         * takeptr: take index pointer
+         * count: items 中元素总数
+         */
         private int putptr, takeptr, count;
 
         BoundedBuffer(int size) {
@@ -74,8 +77,7 @@ public class ConditionTest {
                 ++count;
                 System.out.println("有元素，可以来取: put " + x);
                 notEmpty.signal();
-            }
-            finally {
+            } finally {
                 lock.unlock();
             }
         }
@@ -100,8 +102,7 @@ public class ConditionTest {
                 System.out.println("有空间，可以往里放: take " + x);
                 notFull.signal();
                 return (T) x;
-            }
-            finally {
+            } finally {
                 lock.unlock();
             }
         }

@@ -43,6 +43,7 @@ package java.util.concurrent;
  * instead of explicitly creating threads. For example, rather than
  * invoking {@code new Thread(new(RunnableTask())).start()} for each
  * of a set of tasks, you might use:
+ * 翻译：用来执行提交的 Runnable 任务。该接口提供了一种 将任务提交与每个任务如何运行的机制 解耦的方式，包括线程使用、调度等细节。通常使用 Executor 来替代显式地创建线程。例如，执行一组任务中的每个任务，你可以像下面这样使用（而不是调用 new Thread(new(RunnableTask())).start()）：
  *
  * <pre>
  * Executor executor = <em>anExecutor</em>;
@@ -55,6 +56,7 @@ package java.util.concurrent;
  * require that execution be asynchronous. In the simplest case, an
  * executor can run the submitted task immediately in the caller's
  * thread:
+ * 翻译：Executor 接口并不严格要求执行是异步的。在最简单的情况下，executor 可以在调用者的线程中立即运行提交的任务：
  *
  *  <pre> {@code
  * class DirectExecutor implements Executor {
@@ -66,6 +68,7 @@ package java.util.concurrent;
  * More typically, tasks are executed in some thread other
  * than the caller's thread.  The executor below spawns a new thread
  * for each task.
+ * 翻译：更典型的情况是任务在调用者线程之外的某个线程中执行。下面这个 executor 为每个任务生成一个新线程。
  *
  *  <pre> {@code
  * class ThreadPerTaskExecutor implements Executor {
@@ -78,6 +81,7 @@ package java.util.concurrent;
  * limitation on how and when tasks are scheduled.  The executor below
  * serializes the submission of tasks to a second executor,
  * illustrating a composite executor.
+ * 翻译：许多 Executor 实现对 任务的调度方式和时间 强加了某种限制。下面的 executor 串行化将任务提交给第二个 executor，展示了一个复合的 executor。
  *
  *  <pre> {@code
  * class SerialExecutor implements Executor {
@@ -116,11 +120,13 @@ package java.util.concurrent;
  * interface.  The {@link ThreadPoolExecutor} class provides an
  * extensible thread pool implementation. The {@link Executors} class
  * provides convenient factory methods for these Executors.
+ * 翻译：此 package 中提供的 Executor 实现其实是实现了 ExecutorService，这是一个更广泛的接口。ThreadPoolExecutor 类提供了一个可扩展的线程池实现。Executors 类为这些 Executors 提供了方便的工厂方法。
  *
  * <p>Memory consistency effects: Actions in a thread prior to
  * submitting a {@code Runnable} object to an {@code Executor}
  * <a href="package-summary.html#MemoryVisibility"><i>happen-before</i></a>
  * its execution begins, perhaps in another thread.
+ * 翻译：内存一致性影响：将 Runnable 对象提交给 Executor 之前，线程中的操作 先行发生于 Executor 开始执行，可能在另一个线程中。
  *
  * @since 1.5
  * @author Doug Lea
@@ -131,11 +137,12 @@ public interface Executor {
      * Executes the given command at some time in the future.  The command
      * may execute in a new thread, in a pooled thread, or in the calling
      * thread, at the discretion of the {@code Executor} implementation.
+     * 翻译：在未来的某个时候执行给定的 command。该 command 可以在新线程、线程池或调用线程中执行，由 Executor 的实现来决定。
      *
-     * @param command the runnable task
+     * @param command the runnable task 运行的任务
      * @throws RejectedExecutionException if this task cannot be
-     * accepted for execution
-     * @throws NullPointerException if command is null
+     * accepted for execution 如果这个任务不能被接受执行则抛出 RejectedExecutionException
+     * @throws NullPointerException if command is null 如果 command 为空则抛出 NullPointerException
      */
     void execute(Runnable command);
 }

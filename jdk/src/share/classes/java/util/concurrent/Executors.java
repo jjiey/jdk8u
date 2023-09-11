@@ -34,15 +34,17 @@
  */
 
 package java.util.concurrent;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
+import sun.security.util.SecurityConstants;
+
 import java.security.AccessControlContext;
+import java.security.AccessControlException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
-import java.security.PrivilegedExceptionAction;
 import java.security.PrivilegedActionException;
-import java.security.AccessControlException;
-import sun.security.util.SecurityConstants;
+import java.security.PrivilegedExceptionAction;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Factory and utility methods for {@link Executor}, {@link
@@ -395,11 +397,12 @@ public class Executors {
      * called, runs the given task and returns the given result.  This
      * can be useful when applying methods requiring a
      * {@code Callable} to an otherwise resultless action.
+     * 翻译：返回一个 Callable 对象，该对象在调用时运行给定的任务并返回给定的结果。这在 将需要 Callable 的方法应用于其他无返回结果的操作时 非常有用。
      * @param task the task to run
-     * @param result the result to return
-     * @param <T> the type of the result
-     * @return a callable object
-     * @throws NullPointerException if task null
+     * @param result the result to return 返回的结果
+     * @param <T> the type of the result 返回结果类型
+     * @return a callable object 返回 callable 对象
+     * @throws NullPointerException if task null 如果 task 为 null，则抛出 NullPointerException
      */
     public static <T> Callable<T> callable(Runnable task, T result) {
         if (task == null)
@@ -410,9 +413,10 @@ public class Executors {
     /**
      * Returns a {@link Callable} object that, when
      * called, runs the given task and returns {@code null}.
+     * 翻译：返回一个 Callable 对象，该对象在调用时运行给定的任务并返回 null。
      * @param task the task to run
-     * @return a callable object
-     * @throws NullPointerException if task null
+     * @return a callable object 返回 callable 对象
+     * @throws NullPointerException if task null 如果 task 为 null，则抛出 NullPointerException
      */
     public static Callable<Object> callable(Runnable task) {
         if (task == null)
@@ -499,6 +503,7 @@ public class Executors {
 
     /**
      * A callable that runs given task and returns given result
+     * 翻译：运行给定任务并返回给定结果的 callable
      */
     static final class RunnableAdapter<T> implements Callable<T> {
         final Runnable task;
@@ -592,6 +597,7 @@ public class Executors {
 
     /**
      * The default thread factory
+     * 翻译：默认线程工厂
      */
     static class DefaultThreadFactory implements ThreadFactory {
         private static final AtomicInteger poolNumber = new AtomicInteger(1);
@@ -603,6 +609,7 @@ public class Executors {
             SecurityManager s = System.getSecurityManager();
             group = (s != null) ? s.getThreadGroup() :
                                   Thread.currentThread().getThreadGroup();
+            // 线程池中的线程名称前缀
             namePrefix = "pool-" +
                           poolNumber.getAndIncrement() +
                          "-thread-";
@@ -613,8 +620,10 @@ public class Executors {
                                   namePrefix + threadNumber.getAndIncrement(),
                                   0);
             if (t.isDaemon())
+                // 线程池中所有线程都是 非守护线程
                 t.setDaemon(false);
             if (t.getPriority() != Thread.NORM_PRIORITY)
+                // 线程池中所有线程优先级都是 默认优先级 5
                 t.setPriority(Thread.NORM_PRIORITY);
             return t;
         }

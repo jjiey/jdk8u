@@ -8,11 +8,12 @@ public class ThreadTest {
     public static void main(String[] args) throws Exception {
         ThreadTest t = new ThreadTest();
         // t.testJoin();
-        t.testPriority();
+        // t.testPriority();
         // t.testInterrupt();
         // t.testInterrupt2();
         // t.testInterrupt3();
         // t.testInterrupt4();
+        t.testInterrupted(false);
     }
 
     /**
@@ -171,5 +172,28 @@ public class ThreadTest {
         thread.start();
         Thread.sleep(1000L);
         thread.interrupt();
+    }
+
+    public void testInterrupted(boolean interrupt) {
+        Thread thread = new Thread(() -> {
+            // 因为 interrupted() 是 static 方法，上来先调用 currentThread()，所以必须放在线程里调用
+            System.out.println(Thread.currentThread().interrupted());
+            System.out.println(Thread.currentThread().interrupted());
+            System.out.println(Thread.currentThread().interrupted());
+        });
+        Thread thread2 = new Thread(() -> {
+            Thread.currentThread().interrupt();
+            // 因为 interrupted() 是 static 方法，上来先调用 currentThread()，所以必须放在线程里调用
+            System.out.println(Thread.currentThread().interrupted());
+            System.out.println(Thread.currentThread().interrupted());
+            System.out.println(Thread.currentThread().interrupted());
+        });
+        if (interrupt) {
+            System.out.println("thread2 start.");
+            thread2.start();
+        } else {
+            System.out.println("thread start.");
+            thread.start();
+        }
     }
 }

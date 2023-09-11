@@ -29,6 +29,7 @@ package java.lang;
  * Class {@code Object} is the root of the class hierarchy.
  * Every class has {@code Object} as a superclass. All objects,
  * including arrays, implement the methods of this class.
+ * 翻译：Object 类是类层次结构的根。Object 是所有类的父类。所有对象，包括数组，都实现了此类的方法。
  *
  * @author  unascribed
  * @see     java.lang.Class
@@ -242,6 +243,7 @@ public class Object {
      * is chosen to be awakened. The choice is arbitrary and occurs at
      * the discretion of the implementation. A thread waits on an object's
      * monitor by calling one of the {@code wait} methods.
+     * 翻译：唤醒正在此对象监视器上等待的单个线程。如果所有线程都在此对象上等待，则选择其中一个唤醒。该选择是任意的，并由实现自行决定。线程通过调用其中一个 wait 方法在对象的监视器上等待。
      * <p>
      * The awakened thread will not be able to proceed until the current
      * thread relinquishes the lock on this object. The awakened thread will
@@ -249,10 +251,12 @@ public class Object {
      * actively competing to synchronize on this object; for example, the
      * awakened thread enjoys no reliable privilege or disadvantage in being
      * the next thread to lock this object.
+     * 翻译：在当前线程放弃该对象的锁之前，被唤醒的线程将无法继续。被唤醒的线程将以通常的方式与任何其他可能正在积极竞争在该对象上同步的的线程竞争；例如，被唤醒的线程在成为下一个锁定该对象的线程时不享有可靠的特权或劣势。
      * <p>
      * This method should only be called by a thread that is the owner
      * of this object's monitor. A thread becomes the owner of the
      * object's monitor in one of three ways:
+     * 翻译：此方法只能由作为该对象监视器所有者的线程调用。线程通过以下三种方式之一成为对象监视器的所有者：
      * <ul>
      * <li>By executing a synchronized instance method of that object.
      * <li>By executing the body of a {@code synchronized} statement
@@ -260,11 +264,16 @@ public class Object {
      * <li>For objects of type {@code Class,} by executing a
      *     synchronized static method of that class.
      * </ul>
+     * 通过执行该对象的同步实例方法。
+     * 通过执行在对象上同步的 synchronized 语句的主体。
+     * 对于 Class 类型的对象，通过执行该类的同步静态方法。
      * <p>
      * Only one thread at a time can own an object's monitor.
+     * 一次只有一个线程可以拥有一个对象的监视器。
      *
      * @throws  IllegalMonitorStateException  if the current thread is not
      *               the owner of this object's monitor.
+     *               如果当前线程不是该对象监视器的所有者，则抛出 IllegalMonitorStateException
      * @see        java.lang.Object#notifyAll()
      * @see        java.lang.Object#wait()
      */
@@ -274,6 +283,7 @@ public class Object {
      * Wakes up all threads that are waiting on this object's monitor. A
      * thread waits on an object's monitor by calling one of the
      * {@code wait} methods.
+     * 翻译：唤醒正在此对象监视器上等待的所有线程。线程通过调用其中一个 wait 方法在对象的监视器上等待。
      * <p>
      * The awakened threads will not be able to proceed until the current
      * thread relinquishes the lock on this object. The awakened threads
@@ -281,14 +291,17 @@ public class Object {
      * be actively competing to synchronize on this object; for example,
      * the awakened threads enjoy no reliable privilege or disadvantage in
      * being the next thread to lock this object.
+     * 翻译：在当前线程放弃该对象的锁之前，被唤醒的所有线程将无法继续。被唤醒的所有线程将以通常的方式与任何其他可能正在积极竞争在该对象上同步的的线程竞争；例如，被唤醒的所有线程在成为下一个锁定该对象的线程时不享有可靠的特权或劣势
      * <p>
      * This method should only be called by a thread that is the owner
      * of this object's monitor. See the {@code notify} method for a
      * description of the ways in which a thread can become the owner of
      * a monitor.
+     * 翻译：此方法只能由作为该对象监视器所有者的线程调用。请参阅 notify 方法以了解线程可以成为监视器所有者方式的描述。
      *
      * @throws  IllegalMonitorStateException  if the current thread is not
      *               the owner of this object's monitor.
+     *               如果当前线程不是该对象监视器的所有者，则抛出 IllegalMonitorStateException
      * @see        java.lang.Object#notify()
      * @see        java.lang.Object#wait()
      */
@@ -299,8 +312,10 @@ public class Object {
      * {@link java.lang.Object#notify()} method or the
      * {@link java.lang.Object#notifyAll()} method for this object, or a
      * specified amount of time has elapsed.
+     * 翻译：使当前线程等待，直到另一个线程为此对象调用 java.lang.Objectnotify() 或 java.lang.ObjectnotifyAll(} 方法，或指定的时间已过。
      * <p>
      * The current thread must own this object's monitor.
+     * 翻译：当前线程必须拥有该对象的监视器。
      * <p>
      * This method causes the current thread (call it <var>T</var>) to
      * place itself in the wait set for this object and then to relinquish
